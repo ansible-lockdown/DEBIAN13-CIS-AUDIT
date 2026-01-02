@@ -1,0 +1,27 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+file:
+  {{ if .Vars.deb13cis_rule_1_6_3 }}
+  etc_issue_net_config:
+    title: 1.6.3 | Ensure /etc/issue.net is configured
+    path: /etc/issue.net
+    exists: true
+    contents:
+    - '!/(?i)debian.*/'
+    - '!/(?i)ubuntu.*/'
+    - '!/(?i)kernel.*/'
+    - '!/x86_64/'
+    - '!/(?i)linux'
+    - '{{ .Vars.deb13cis_warning_banner }}'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.3
+      NIST800-53R5:
+      - CM-1
+      - CM-3
+      - CM-6
+  {{ end }}
+{{ end }}

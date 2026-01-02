@@ -1,0 +1,36 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_9 }}
+kernel-param:
+  address_space_live:
+    title: 1.5.9 | Ensure kernel.randomize_va_space is configured | running
+    name: kernel.randomize_va_space
+    value: '2'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.9
+      NIST800-53R5: SI-16
+      CCI: CCI-002824
+command:
+  aslr_enabled_conf:
+    title: 1.5.9 | Ensure kernel.randomize_va_space is configured | conf
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    exec: 'grep "kernel\.randomize_va_space" /etc/sysctl.conf /etc/sysctl.d/*'
+    stdout:
+    - '/^*.conf:kernel.randomize_va_space\s*=\s*2/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.9
+      NIST800-53R5: SI-16
+      CCI: CCI-002824
+  {{ end }}
+{{ end }}

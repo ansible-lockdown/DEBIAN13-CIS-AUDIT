@@ -1,0 +1,29 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+file:
+  {{ if .Vars.deb13cis_rule_1_6_1 }}
+  motd_config :
+    title: 1.6.1 | Ensure /etc/motd is configured
+    path: /etc/motd
+    exists:
+      or:
+      - true
+      - false
+    contents:
+    - '!/(?i)debian.*/'
+    - '!/(?i)ubuntu.*/'
+    - '!/(?i)kernel.*/'
+    - '!/x86_64/'
+    - '!/(?i)linux'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.6.1
+      NIST800-53R5:
+      - CM-1
+      - CM-3
+      - CM-6
+  {{ end }}
+{{ end }}

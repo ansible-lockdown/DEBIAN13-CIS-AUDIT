@@ -1,0 +1,19 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_5_4_1_4 }}
+file:
+  login_defs_hashing:
+    title: 5.4.1.4 | Ensure password expiration warning days is configured
+    path: /etc/login.defs
+    exists: true
+    contents:
+    - '/^ENCRYPT_METHOD (SHA512|YESCRYPT)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.4.1.4
+      NIST800-53R5: IA-5
+  {{ end }}
+{{ end }}

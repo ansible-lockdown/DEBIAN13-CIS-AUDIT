@@ -1,0 +1,25 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+    {{ if .Vars.deb13cis_rule_1_2_1_4 }}
+file:
+  apt_trusted_perms:
+    title: 1.2.1.4 | Ensure access to /etc/apt/trusted.gpg.d directory is configured
+    path: /etc/apt/trusted.gpg.d
+    filetype: directory
+    exists: true
+    owner: root
+    group: root
+    mode:
+      or:
+      - "0755"
+      - "0750"
+      - "0700"
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 1.2.1.4
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

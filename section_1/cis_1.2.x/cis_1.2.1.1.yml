@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+    {{ if .Vars.deb13cis_rule_1_2_1_1 }}
+command:
+  sources_signed_by:
+    title: 1.2.1.1 | Ensure the source.list and .source files use the Signed-By option
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    exec: grep -PRLs -- '^([^#\n\r]+)?\bSigned-By\b' /etc/apt/sources.list /etc/apt/sources.list.d/*.{list,sources}
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.2.1.1
+      NIST800-53R5: SI-2
+    {{ end }}
+{{ end }}

@@ -1,0 +1,18 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_1_1_11 }}
+command:
+  unused_filesystems:
+    title: 1.1.1.11 | Ensure unused filesystems kernel modules are not available | Manual Check will be needed to validate if alerts
+    exit-status: 0
+    exec: modprobe -n -v
+    stdout:
+    - '!/(afs|ceph|cifs|exfat|ext|fat|fscache|fuse|gfs2|nfs_common|nfsd|smbfs_common)/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.1.1.11
+      NIST800-53R5: CM-7
+  {{ end }}
+{{ end }}

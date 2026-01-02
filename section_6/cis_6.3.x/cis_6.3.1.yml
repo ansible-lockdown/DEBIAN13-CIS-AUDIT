@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_6_3_1 }}
+package:
+{{- range mkSlice "aide" "aide-common" }}
+  {{ . }}:
+    title: 6.3.1 | Ensure AIDE is installed
+    installed: true
+    name: {{ . }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 6.3.1
+      NIST800-53R5:
+      - AU-2
+    {{ end }}
+  {{ end }}
+{{ end }}

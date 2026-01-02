@@ -1,0 +1,22 @@
+
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_7_2_4 }}
+file:
+  shadow_group_empty:
+    title: 7.2.4 | Ensure shadow group is empty
+    path: /etc/group
+    exists: true
+    contents:
+    - '/^shadow:x:\d{2,}:$/'
+    - '!/^shadow:x:\d{2,}:./'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 7.2.4
+      NIST800-53R5:
+      - IA-5
+  {{ end }}
+{{ end }}

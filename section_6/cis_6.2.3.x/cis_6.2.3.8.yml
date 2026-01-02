@@ -1,0 +1,39 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_3_8 }}
+command:
+  auditd_locale_cnf:
+    title: 6.2.3.8 | Ensure events that modify the system's network environment are collected | conf check
+    exec: grep system-locale /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/network/interfaces -F perm=wa -k system-locale'
+    - '-a always,exit -F arch=b64 -S all -F dir=/etc/network/interfaces.d -F perm=wa -k system-locale'
+    - '-a always,exit -F arch=b64 -S all -F dir=/etc/netplan/ -F perm=wa -k system-locale'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.8
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  auditd_locale_live:
+    title: 6.2.3.8 | Ensure events that modify the system's network environment are collected | running
+    exec: auditctl -l | grep system-locale
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/network/interfaces -F perm=wa -F key=system-locale'
+    - '-a always,exit -F arch=b64 -S all -F dir=/etc/network/interfaces.d -F perm=wa -F key=system-locale'
+    - '-a always,exit -F dir=/etc/netplan/ -F perm=wa'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.8
+      NIST800-53R5:
+      - AU-3
+      - CM-6
+  {{ end }}
+{{ end }}

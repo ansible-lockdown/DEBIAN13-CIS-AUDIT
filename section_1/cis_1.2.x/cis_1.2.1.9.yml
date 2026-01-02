@@ -1,0 +1,22 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+    {{ if .Vars.deb13cis_rule_1_2_1_9 }}
+command:
+  apt_auth_conf:
+    title: 1.2.1.9 | Ensure access to files in the /etc/apt/sources.list.d directory is configured
+    exec: "stat -Lc 'Access: (%a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/apt/sources.list.d/* 2>/dev/null"
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.2.1.9
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

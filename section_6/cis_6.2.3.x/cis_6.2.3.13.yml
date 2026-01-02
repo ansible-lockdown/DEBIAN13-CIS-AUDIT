@@ -1,0 +1,33 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_3_13 }}
+command:
+  auditd_etcpasswd_cnf:
+    title: 6.2.3.13 | Ensure events that modify /etc/passwd information are collected | conf check
+    exec: grep identity /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/passwd -F perm=wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.13
+      NIST800-53R5:
+      - AU-3
+  auditd_etcpasswd_live:
+    title: 6.2.3.13 | Ensure events that modify /etc/passwd information are collected | running
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/passwd -F perm=wa -F key=identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.13
+      NIST800-53R5:
+      - AU-3
+  {{ end }}
+{{ end }}

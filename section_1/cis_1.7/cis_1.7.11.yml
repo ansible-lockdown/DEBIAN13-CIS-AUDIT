@@ -1,0 +1,21 @@
+---
+
+{{ if .Vars.deb13cis_gui }}
+  {{ if .Vars.deb13cis_level_2 }}
+    {{ if .Vars.deb13cis_rule_1_7_11 }}
+file:
+  /etc/gdm/custom.conf:
+    title: 1.7.11 | Ensure Xwayland is configured
+    path: /etc/gdm/custom.conf
+    exists: true
+    contents:
+    - '!/^WaylandEnable\s*=\s*true/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 1.7.11
+      NIST800-53R5: SI-4
+    {{ end }}
+  {{ end }}
+{{ end }}

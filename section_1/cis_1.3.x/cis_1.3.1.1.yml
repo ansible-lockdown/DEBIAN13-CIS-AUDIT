@@ -1,0 +1,22 @@
+---
+
+{{ if not .Vars.deb13cis_apparmor_disable }}
+  {{ if .Vars.deb13cis_level_1 }}
+    {{ if  .Vars.deb13cis_rule_1_3_1_1 }}
+package:
+{{- range mkSlice "sssd" "apparmor" "apparmor-utils"}}
+  {{ . }}:
+    title: 1.3.1.1 | Ensure apparmor packages are installed
+    installed: true
+    name: {{ . }}
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.3.1.1
+      NIST800-53R5:
+      - AC-3
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

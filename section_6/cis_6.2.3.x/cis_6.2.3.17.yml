@@ -1,0 +1,36 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_3_17 }}
+command:
+  auditd_pam_cnf:
+    title: 6.2.3.17 | Ensure events that modify /etc/pam.conf and /etc/pam.d/ information are collected | conf check
+    exec: grep pam /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F dir=/etc/pam.d -F perm=wa -k identity'
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/pam.conf -F perm=wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.17
+      NIST800-53R5:
+      - AU-12
+  auditd_pam_live:
+    title: 6.2.3.17 | Ensure events that modify /etc/pam.conf and /etc/pam.d/ information are collected | running
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/pam.conf -F perm=wa -F key=identity'
+    - '-a always,exit -F arch=b64 -S all -F dir=/etc/pam.d -F perm=wa -F key=identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.17
+      NIST800-53R5:
+      - AU-12
+  {{ end }}
+{{ end }}
+

@@ -1,0 +1,25 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+    {{ if .Vars.deb13cis_rule_1_2_1_7 }}
+file:
+  keyrings_perms:
+    title: 1.2.1.7 | Ensure access to /usr/share/keyrings directory is configured
+    path: /usr/share/keyrings
+    filetype: directory
+    exists: true
+    owner: root
+    group: root
+    mode:
+      or:
+      - "0755"
+      - "0750"
+      - "0700"
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 1.2.1.7
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

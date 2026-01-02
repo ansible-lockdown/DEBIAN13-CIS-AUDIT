@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_12 }}
+command:
+  system_processsizemax_conf:
+    title: 1.5.12 | Ensure systemd-coredump ProcessSizeMax is configured
+    exec: grep -Ri '^ProcessSizeMax' //etc/systemd/coredump.conf.d/*
+    exit-status:
+      or:
+      - 0
+      - 2
+    stdout:
+    - '/^*.conf:ProcessSizeMax\s*=\s*0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.12
+      NIST800-53R5: CM-6
+      CCI: CCI-000366
+  {{ end }}
+{{ end }}

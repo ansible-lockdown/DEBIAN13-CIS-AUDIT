@@ -1,0 +1,75 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_3_1_1 }}
+command:
+  {{ if not .Vars.deb13cis_ipv6_required }}
+  default_grub_ipv6:
+    title: 3.1.1 | Ensure IPv6 status is identified
+    exec: cat /sys/module/ipv6/parameters/disable
+    exit-status: 0
+    stdout:
+    - '/^1/'
+    - '!/^0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.1.1
+      NIST800-53R5:
+      - CM-7
+  sysctl_ipv6_disable:
+    title: 3.1.1 | Ensure IPv6 status is identified
+    exec: grep disable_ipv6 /etc/sysctl.conf /etc/sysctl.d/*
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    stdout:
+    - '/.*: net.ipv6.conf.all.disable_ipv6 = 1/'
+    - '/.*: net.ipv6.conf.default.disable_ipv6 = 1/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.1.1
+      NIST800-53R5:
+      - CM-7
+  {{ end }}
+  {{ if .Vars.deb13cis_ipv6_required }}
+  default_grub_ipv6:
+    title: 3.1.1 | Ensure IPv6 status is identified
+    exec: cat /sys/module/ipv6/parameters/disable
+    exit-status: 0
+    stdout:
+    - '/^0/'
+    - '!/^1/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.1.1
+      NIST800-53R5:
+      - CM-7
+  sysctl_ipv6_disable:
+    title: 3.1.1 | Ensure IPv6 status is identified
+    exec: grep disable_ipv6 /etc/sysctl.conf /etc/sysctl.d/*
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    stdout:
+    - '!/.*: net.ipv6.conf.all.disable_ipv6 = 1/'
+    - '!/.*: net.ipv6.conf.default.disable_ipv6 = 1/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.1.1
+      NIST800-53R5:
+      - CM-7
+    {{ end }}
+  {{ end }}
+{{ end }}

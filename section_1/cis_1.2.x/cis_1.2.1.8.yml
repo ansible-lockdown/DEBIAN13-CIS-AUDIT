@@ -1,0 +1,25 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+    {{ if .Vars.deb13cis_rule_1_2_1_8 }}
+file:
+  apt_sources_list.d_perms:
+    title: 1.2.1.8 | Ensure access to /etc/apt/sources.list.d directory is configured
+    path: /etc/apt/sources.list.d
+    filetype: directory
+    exists: true
+    owner: root
+    group: root
+    mode:
+      or:
+      - "0755"
+      - "0750"
+      - "0700"
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 1.2.1.8
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

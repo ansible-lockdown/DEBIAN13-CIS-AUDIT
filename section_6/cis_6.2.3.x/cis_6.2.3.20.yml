@@ -1,0 +1,33 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_3_20 }}
+command:
+  auditd_xattr_cnf:
+    title: 6.2.3.20 | Ensure discretionary access control permission modification events setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr are collected | conf check
+    exec: grep xattr /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - '/[^#]-a always,exit -F arch=b64 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=(unset|-1|auid!=4294967295) -k perm_mod/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.20
+      NIST800-53R5:
+      - AU-12
+  auditd_xattr_live:
+    title: 6.2.3.20 | Ensure discretionary access control permission modification events setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr are collected | running
+    exec: auditctl -l | grep xattr
+    exit-status: 0
+    stdout:
+    - '/-a always,exit -F arch=b64 -S setxattr,lsetxattr,fsetxattr,removexattr,lremovexattr,fremovexattr -F auid>=1000 -F auid!=(unset|-1|auid!=4294967295) -F key=perm_mod/'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.20
+      NIST800-53R5:
+      - AU-12
+  {{ end }}
+{{ end }}

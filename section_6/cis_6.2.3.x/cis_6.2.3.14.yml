@@ -1,0 +1,35 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_3_14 }}
+command:
+  auditd_shadow_cnf:
+    title: 6.2.3.14 | Ensure events that modify /etc/shadow and /etc/gshadow are collected | conf check
+    exec: grep identity /etc/audit/rules.d/*.rules
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/shadow -F perm=wa -k identity'
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/gshadow -F perm=wa -k identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.14
+      NIST800-53R5:
+      - AU-12
+  auditd_shadow_live:
+    title: 6.2.3.14 | Ensure events that modify /etc/shadow and /etc/gshadow are collected | running
+    exec: auditctl -l | grep identity
+    exit-status: 0
+    stdout:
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/gshadow -F perm=wa -F key=identity'
+    - '-a always,exit -F arch=b64 -S all -F path=/etc/shadow -F perm=wa -F key=identity'
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.3.14
+      NIST800-53R5:
+      - AU-12
+  {{ end }}
+{{ end }}

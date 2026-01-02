@@ -1,0 +1,35 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_3_2_2 }}
+command:
+  modprobe_can:
+    title: 3.2.2 | Ensure can kernel module is not available | DCCP config
+    exit-status: 0
+    exec: 'modprobe -n -v can'
+    stdout:
+      - '/install /bin/(true|false)/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.2.2
+      NIST800-53R5:
+      - CM-7
+      CCI: CCI-000381
+  lsmod_can:
+    title: 3.2.2 | Ensure can kernel module is not available | running can
+    exit-status: 1
+    exec: lsmod | grep -i can
+    stdout:
+    - '!/^.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 3.2.2
+      NIST800-53R5:
+      - CM-7
+      CCI: CCI-000381
+  {{ end }}
+{{ end }}

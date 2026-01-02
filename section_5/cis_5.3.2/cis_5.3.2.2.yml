@@ -1,0 +1,32 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_5_3_2_2 }}
+file:
+  pam_faillock_enabled_common_act:
+    title: 5.3.2.2 | Ensure pam_faillock module is enabled | common-account
+    path: /etc/pam.d/common-account
+    exists: true
+    contents:
+    - '/^\s*account\s+(requisite|required)\s+pam_faillock.so/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.2
+      NIST800-53R5: NA
+  pam_faillock_enabled_common_auth:
+    title: 5.3.2.2 | Ensure pam_faillock module is enabled  | common-auth
+    path: /etc/pam.d/common-auth
+    exists: true
+    contents:
+    - '/^\s*auth\s+(requisite|required)\s+pam_faillock.so\s+preauth/'
+    - '/^\s*auth\s*\[default=die\]\s+pam_faillock.so\s+authfail/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.3.2.2
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

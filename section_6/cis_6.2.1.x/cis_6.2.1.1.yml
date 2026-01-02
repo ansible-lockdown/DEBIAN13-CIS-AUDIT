@@ -1,0 +1,23 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_6_2_1_1 }}
+package:
+{{- range mkSlice "auditd" "audispd-plugins" }}
+  {{ . }}:
+    title: 6.2.1.1 | Ensure auditd packages are installed | auditd
+    installed: true
+    name: {{ . }}
+    meta:
+      server: 2
+      workstation: 2
+      CIS_ID:
+      - 6.2.1.1
+      NIST800-53R5:
+      - AU-2
+      - AU-3
+      - AU-12
+      - SI-5
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,43 @@
+---
+
+{{ if .Vars.deb13cis_gui }}
+  {{ if .Vars.deb13cis_level_1 }}
+    {{ if .Vars.deb13cis_rule_1_7_6 }}
+command:
+  gdm_removable_media:
+    title: 1.7.6 | Ensure GDM automatic mounting of removable media is disabled
+    exec: gsettings get org.gnome.desktop.media-handling automount
+    exit-status: 0
+    stdout:
+    - '/^false/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID:
+      - 1.7.6
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+  gdm_removable_open:
+    title: 1.7.6 | Ensure GDM automatic mounting of removable media is disabled
+    exec: gsettings get org.gnome.desktop.media-handling automount-open
+    exit-status: 0
+    stdout:
+    - '/^false/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID:
+      - 1.7.6
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,35 @@
+---
+
+{{ if .Vars.deb13cis_gui }}
+  {{ if .Vars.deb13cis_level_1 }}
+    {{ if .Vars.deb13cis_rule_1_7_4 }}
+command:
+  screensaver_lock_delay:
+    title: 1.7.4 | Ensure GDM screen locks when the user is idle | lock delay
+    exec: gsettings get org.gnome.desktop.screensaver lock-delay
+    exit-status: 0
+    contents:
+    - '/^uint32 [1-5]$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.4
+      NIST800-53R5:
+      - AC-11
+  screensaver_idle_delay:
+    title: 1.7.4 | Ensure GDM screen locks when the user is idle | idle_delay
+    exec: gsettings get org.gnome.desktop.screensaver idle-delay
+    exit-status: 0
+    contents:
+    - '/^uint32 ([2-9][0-9]|[1-8][0-9][0-9]|900)]$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.7.4
+      NIST800-53R5:
+      - AC-11
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,36 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_4 }}
+kernel-param:
+  suid_dumpable_live:
+    title: 1.5.4 | Ensure fs.suid_dumpable is configured | running
+    value: 0
+    name: fs.suid_dumpable
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.4
+      NIST800-53R5: CM-6
+      CCI: CCI-000366
+command:
+  suid_dumpable_conf:
+    title: 1.5.4 | Ensure fs.suid_dumpable is configured | conf
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    exec: 'grep "fs\.suid_dumpable" /etc/sysctl.conf /etc/sysctl.d/*'
+    stdout:
+    - '/^*.conf:fs.suid_dumpable\s*=\s*0$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.4
+      NIST800-53R5: CM-6
+      CCI: CCI-000366
+  {{ end }}
+{{ end }}

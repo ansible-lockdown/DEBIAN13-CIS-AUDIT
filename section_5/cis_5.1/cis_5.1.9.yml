@@ -1,0 +1,25 @@
+---
+
+{{ if .Vars.deb13cis_level_2 }}
+  {{ if .Vars.deb13cis_rule_5_1_9 }}
+file:
+  sshd_gssapiauth:
+    title: 5.1.9 | Ensure sshd GSSAPIAuthentication is disabled
+    path: /etc/ssh/sshd_config
+    exists: true
+    contents:
+    - 'GSSAPIAuthentication no'
+    - '!/^GSSAPIAuthentication yes/'
+    meta:
+      server: 2
+      workstation: 1
+      CIS_ID:
+      - 5.1.9
+      NIST800-53R5:
+      - CM-1
+      - CM-2
+      - CM-6
+      - CM-7
+      - IA-5
+  {{ end }}
+{{ end }}

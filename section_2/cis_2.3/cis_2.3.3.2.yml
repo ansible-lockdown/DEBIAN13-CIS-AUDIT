@@ -1,0 +1,21 @@
+---
+
+{{ if eq .Vars.deb13cis_time_sync_tool "chrony" }}
+  {{ if .Vars.deb13cis_level_1 }}
+    {{ if .Vars.deb13cis_rule_2_3_3_2 }}
+file:
+  chrony_user:
+    title: 2.3.3.2 | Ensure chrony is running as user _chrony
+    path: /etc/chrony/chrony.conf
+    exists: true
+    contents:
+    - '/^user _chrony/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID: 2.3.3.2
+      NIST800-53R5:
+      - AU-8
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,41 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_8 }}
+kernel-param:
+  kptr_restrict_live:
+    title: 1.5.8 | Ensure kernel.kptr_restrict is configured | running
+    value:
+      or:
+      - 1
+      - 2
+    name: kernel.kptr_restrict
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.8
+      NIST800-53R5: CM-6
+      CCI:
+      - CCI-000366
+command:
+  kptr_restrict_conf:
+    title: 1.5.8 | Ensure kernel.kptr_restrict is configured | conf
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    exec: 'grep "kernel\.kptr_restrict" /etc/sysctl.conf /etc/sysctl.d/*'
+    stdout:
+    - '/^*.conf:kernel.kptr_restrict\s*=\s*(1|2)$/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.8
+      NIST800-53R5: CM-6
+      CCI:
+      - CCI-000366
+  {{ end }}
+{{ end }}

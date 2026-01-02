@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_6 }}
+package:
+  prelink_absent:
+    title: 1.5.6 | Ensure prelink is not installed
+    name: prelink
+    installed: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.6
+      NIST800-53R5:
+      - CM-1
+      - CM-3
+      - CM-6
+  {{ end }}
+{{ end }}

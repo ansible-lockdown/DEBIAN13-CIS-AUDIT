@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_5_1_13 }}
+command:
+  ssh_post-quantum_algo:
+    title: 5.1.13 | Ensure sshd post-quantum cryptography key exchange algorithms are configured
+    exec: ssh -Q kex
+    exit-status: 0
+    stdout:
+    - '/sntrup761x25519-sha512@openssh.com/'
+    - '/mlkem768x25519-sha256/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.13
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

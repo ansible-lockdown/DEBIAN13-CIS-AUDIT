@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_4_1_2 }}
+service:
+  ufw_running:
+    title: 4.1.2 | Ensure ufw service is configured
+    name: ufw
+    running: true
+    enabled: true
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 4.1.2
+      NIST800-53R5:
+      - AC-17
+      CCI: CCI-002314
+  {{ end }}
+{{ end }}

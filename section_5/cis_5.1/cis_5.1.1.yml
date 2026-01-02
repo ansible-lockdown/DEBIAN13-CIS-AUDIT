@@ -1,0 +1,43 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_5_1_1 }}
+file:
+  sshd_config_perms:
+    title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured
+    path: /etc/ssh/sshd_config
+    exists: true
+    mode:
+      or:
+      - "0600"
+      - "0400"
+    owner: root
+    group: root
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.1
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+command:
+  ssh_config.d_perms:
+    title: 5.1.1 | Ensure access to /etc/ssh/sshd_config is configured | config.d
+    exec: find /etc/ssh/sshd_config.d -perm /137 ! -user root ! -group root
+    exit-status:
+      or:
+      - 0
+      - 1
+    stdout:
+    - '!/.*/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.1
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+  {{ end }}
+{{ end }}

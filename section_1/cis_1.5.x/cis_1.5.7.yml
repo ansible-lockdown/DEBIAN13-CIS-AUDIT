@@ -1,0 +1,34 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_7 }}
+service:
+  apport_stopped:
+    title: 1.5.7 | Ensure Automatic Error Reporting is configured | service
+    name: apport
+    enabled: false
+    running: false
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.7
+      NIST800-53R5: NA
+file:
+  apport_disabled:
+    title: 1.5.7 | Ensure Automatic Error Reporting is configured | conf
+    path: /etc/default/apport
+    exists:
+      or:
+      - true
+      - false
+    contents:
+    - '/enabled\s*=\s*0/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.7
+      NIST800-53R5: NA
+  {{ end }}
+{{ end }}

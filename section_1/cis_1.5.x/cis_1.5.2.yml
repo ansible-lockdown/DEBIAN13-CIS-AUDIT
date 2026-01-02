@@ -1,0 +1,44 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_5_2 }}
+kernel-param:
+  protected_symlinks_live:
+    title: 1.5.2 | Ensure fs.protected_symlinks is configured | running
+    name: fs.protected_symlinks
+    value: '1'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.2
+      NIST800-53R5:
+      - AC-3
+      - AC-6
+      CCI:
+      - CCI-002165
+      - CCI-002235
+command:
+  protected_symlinks_conf:
+    title: 1.5.2 | Ensure fs.protected_symlinks is configured | conf
+    exit-status:
+      or:
+      - 0
+      - 1
+      - 2
+    exec: 'grep "fs\.protected_symlinks" /etc/sysctl.conf /etc/sysctl.d/*'
+    stdout:
+    - '/^*.conf:fs.protected_symlinks\s*=\s*1/'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.5.2
+      NIST800-53R5:
+      - AC-3
+      - AC-6
+      CCI:
+      - CCI-002165
+      - CCI-002235
+  {{ end }}
+{{ end }}

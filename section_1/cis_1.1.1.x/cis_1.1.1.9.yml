@@ -1,0 +1,29 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_1_1_9 }}
+command:
+  firewire-core:
+    title: 1.1.1.9 | Ensure firewire-core kernel module is not available
+    exit-status: 0
+    exec: "modprobe -n -v firewire-core | grep -E '(firewire-core|install)'"
+    stdout:
+    - install /bin/true
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.1.1.9
+      NIST900-53R5: CM-7
+  blacklist_firewire-core:
+    title: 1.1.1.9 | Ensure firewire-core kernel module is not available | blacklist
+    exit-status: 0
+    exec: grep firewire-core /etc/modprobe.d/*.conf
+    stdout:
+      - '/blacklist firewire-core/'
+    meta:
+      server: 1
+      workstation: 2
+      CIS_ID: 1.1.1.9
+      NIST900-53R5: CM-7
+  {{ end }}
+{{ end }}

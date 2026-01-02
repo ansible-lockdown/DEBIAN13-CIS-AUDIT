@@ -1,0 +1,20 @@
+---
+
+{{ if .Vars.deb13cis_level_1 }}
+  {{ if .Vars.deb13cis_rule_1_4_2 }}
+file:
+  grub_bootloaders_perms:
+    title: 1.4.2 | Ensure access to bootloader config is configured| file_perms | grub.cfg
+    path: /boot/grub/grub.cfg
+    exists: true
+    owner: root
+    group: root
+    mode: '0600'
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 1.4.2
+      NIST800-53R5: AC-3
+  {{ end }}
+{{ end }}
