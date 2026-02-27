@@ -669,8 +669,8 @@ deb13cis_sshd_allow_groups: ""
 deb13cis_sshd_deny_users: ""
 deb13cis_sshd_deny_groups: ""
 
-deb13cis_ssh_clientaliveinterval: 15
-deb13cis_ssh_clientalivecountmax: 3
+deb13cis_sshd_client_alive_interval: 15
+deb13cis_sshd_client_alive_count_max: 3
 
 ## 5.2.7 set sugroup if differs from wheel
 deb13cis_sugroup: nosugroup
