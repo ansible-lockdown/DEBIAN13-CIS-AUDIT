@@ -5,7 +5,7 @@
 command:
   sshd_KEX:
     title: 5.1.12 | Ensure sshd KexAlgorithms is configured
-    command: sshd -T | grep -Pi -- 'kexalgorithms\h+([^#\n\r]+,)?(diffie-hellman-group1-sha1|diffie-hellman-group14-sha1|diffie-hellman-group-exchange-sha1)\b'
+    exec: sshd -T | grep -Pi -- 'kexalgorithms\h+([^#\n\r]+,)?(diffie-hellman-group1-sha1|diffie-hellman-group14-sha1|diffie-hellman-group-exchange-sha1)\b'
     exit-status:
       or:
       - 0
