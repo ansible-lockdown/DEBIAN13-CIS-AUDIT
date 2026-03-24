@@ -1,3 +1,5 @@
+---
+
 gossfile:
 # Section 1
   {{ if .Vars.deb13cis_section1 }}
