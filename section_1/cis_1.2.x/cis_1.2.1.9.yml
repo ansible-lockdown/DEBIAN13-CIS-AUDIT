@@ -4,7 +4,7 @@
     {{ if .Vars.deb13cis_rule_1_2_1_9 }}
 command:
   apt_auth_conf:
-    title: 1.2.1.9 | Ensure access to files in the /etc/apt/sources.list.d directory is configured
+    title: 1.2.1.9 | Ensure access to files in /etc/apt/sources.list.d are configured
     exec: "stat -Lc 'Access: (%a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/apt/sources.list.d/* 2>/dev/null"
     exit-status:
       or:

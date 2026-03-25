@@ -2,7 +2,7 @@
 
 {{ if .Vars.deb13cis_level_1 }}
   {{ if .Vars.deb13cis_rule_6_1_1_2_3 }}
-    {{ if not .Vars.deb13cis_is_syslog_server }}
+    {{ if not .Vars.deb13cis_system_is_log_server }}
 service:
   systemd-journal-upload.service:
     title: 6.1.1.2.3 | Ensure systemd-journal-upload is enabled and active

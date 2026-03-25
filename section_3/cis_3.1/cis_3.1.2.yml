@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_3_1_2 }}
 command:
   wireless_disabled:
-    title: 3.1.2 | Ensure wireless interfaces are not available| disabled
+    title: 3.1.2 | Ensure wireless interfaces are not available
     exit-status: 0
     exec: "find /sys/class/net/*/wireless -type d 2>/dev/null | sed 's|/wireless$||' | while read iface; do cat \"$iface/operstate\" 2>/dev/null; done | grep -qv '^down$' && echo FAIL || echo OK"
     stdout:

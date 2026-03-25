@@ -6,7 +6,7 @@
       {{ if not .Vars.deb13cis_telnet_mask }}
 package:
   telnet_pkg:
-    title: 2.1.16 | Ensure telnet server services are not in use | pkg removed
+    title: 2.1.16 | Ensure telnet-server services are not in use | pkg removed
     name: telnetd-hpa
     installed: false
     meta:
@@ -19,7 +19,7 @@ package:
       {{ if .Vars.deb13cis_telnet_mask }}
 file:
   telnet_service_masked:
-    title: 2.1.16 | Ensure telnet server services are not in use | masked
+    title: 2.1.16 | Ensure telnet-server services are not in use | masked
     path: /etc/systemd/system/inetutils-inetd.service
     exists: true
     filetype: symlink

@@ -1,6 +1,6 @@
 ---
 
-{{ if .Vars.deb13cis_gui }}
+{{ if .Vars.deb13cis_desktop_required }}
   {{ if .Vars.deb13cis_level_1 }}
     {{ if .Vars.deb13cis_rule_1_7_10 }}
 file:

@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_5_4_2_8 }}
 command:
   secure_accts_valid_login:
-    title: 5.4.2.8 | Ensure system accounts do not have a valid login shell
+    title: 5.4.2.8 | Ensure accounts without a valid login shell are locked
     exec: |
       bash
       {

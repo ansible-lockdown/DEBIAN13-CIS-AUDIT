@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_5_1_21 }}
 file:
   ssh_permit_root:
-    title: 5.1.21 | Ensure sshd PermitRootLogin is configured
+    title: 5.1.21 | Ensure sshd PermitRootLogin is disabled
     path: /etc/ssh/sshd_config
     exists: true
     contents:

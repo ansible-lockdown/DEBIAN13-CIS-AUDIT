@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_3_3_2_5 }}
 kernel-param:
   net.ipv6.conf.all.accept_source_route:
-    title: 3.3.2.5 | Ensure source routed packets are not accepted
+    title: 3.3.2.5 | Ensure net.ipv6.conf.all.accept_source_route is configured
     value: '0'
     name: net.ipv6.conf.all.accept_source_route
     meta:
@@ -17,7 +17,7 @@ kernel-param:
       CCI: CCI-000366
 command:
   ipv6_all_source_routed:
-    title: 3.3.2.5 | Ensure source routed packets are not accepted | live ipv6 all
+    title: 3.3.2.5 | Ensure net.ipv6.conf.all.accept_source_route is configured | live ipv6 all
     exec: grep net.ipv6.conf.all.accept_source_route /etc/sysctl.conf /etc/sysctl.d/*.conf /run/sysctl.d/*.conf /usr/local/lib/sysctl.d/*.conf /usr/lib/sysctl.d/*.conf /lib/sysctl.d/*.conf
     exit-status:
       or:
