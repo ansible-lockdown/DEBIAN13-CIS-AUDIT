@@ -50,15 +50,13 @@ gossfile:
   {{ end }}
   # Logfiles
   section_6/cis_6.1.3.x/*.yml: {}
-  # Auditd and level 2
+  # level 2
   # auditd
   {{ if .Vars.deb13cis_level_2 }}
-    {{ if .Vars.deb13cis_auditd }}
   section_6/cis_6.2.1.x/*.yml: {}
   section_6/cis_6.2.2.x/*.yml: {}
   section_6/cis_6.2.3.x/*.yml: {}
   section_6/cis_6.2.4.x/*.yml: {}
-    {{ end }}
   {{ end }}
   # AIDE
   section_6/cis_6.3.*/*.yml: {}

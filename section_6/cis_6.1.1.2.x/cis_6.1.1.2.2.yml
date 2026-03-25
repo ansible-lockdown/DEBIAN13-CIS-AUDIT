@@ -2,7 +2,7 @@
 
 {{ if .Vars.deb13cis_level_1 }}
   {{ if .Vars.deb13cis_rule_6_1_1_2_2 }}
-    {{ if not .Vars.deb13cis_is_syslog_server }}
+    {{ if not .Vars.deb13cis_system_is_log_server }}
 file:
   journal_remote_configured:
     title: 6.1.1.2.2 | Ensure systemd-journal-upload authentication is configured
