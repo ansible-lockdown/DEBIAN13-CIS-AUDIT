@@ -559,7 +559,7 @@ deb13cis_time_sync_tool: "chrony"
 # of the time synchronization mechanism you are using.
 deb13cis_time_pool:
   - name: time.nist.gov
-    options: iburst maxsources 4
+    pool_options: iburst maxsources 4
 
 
 # The following variable represents a list of of time servers used
