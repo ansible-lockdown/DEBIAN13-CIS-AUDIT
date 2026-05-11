@@ -16,7 +16,7 @@ file:
       - 5.3.2.2
       NIST800-53R5: NA
   pam_faillock_enabled_common_auth:
-    title: 5.3.2.2 | Ensure pam_faillock module is enabled  | common-auth
+    title: 5.3.2.2 | Ensure pam_faillock module is enabled | common-auth
     path: /etc/pam.d/common-auth
     exists: true
     contents:

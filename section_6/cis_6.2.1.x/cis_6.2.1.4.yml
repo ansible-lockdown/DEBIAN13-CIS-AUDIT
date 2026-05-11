@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_6_2_1_4 }}
 command:
   audit_backlog_default_grub:
-    title: 6.2.1.4 | Ensure audit_backlog_limit is sufficient | default
+    title: 6.2.1.4 | Ensure audit_backlog_limit is configured | default
     exec: grep audit_backlog /etc/default/grub
     exit-status: 0
     stdout:

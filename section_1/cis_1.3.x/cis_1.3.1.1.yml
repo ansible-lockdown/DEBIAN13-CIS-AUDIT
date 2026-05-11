@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_level_1 }}
     {{ if  .Vars.deb13cis_rule_1_3_1_1 }}
 package:
-{{- range mkSlice "sssd" "apparmor" "apparmor-utils"}}
+{{- range mkSlice "apparmor" "apparmor-utils"}}
   {{ . }}:
     title: 1.3.1.1 | Ensure apparmor packages are installed
     installed: true

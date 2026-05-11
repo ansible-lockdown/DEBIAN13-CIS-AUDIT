@@ -4,7 +4,7 @@
   {{ if .Vars.deb13cis_rule_6_1_1_1_4 }}
 service:
   onesyslog:
-    title: 6.1.1.1.4 | Ensure only one logging system is in use
+    title: 6.1.1.1.4 | Ensure journald ForwardToSyslog is disabled
     {{ if eq .Vars.deb13cis_syslog "journald"}}
     name: rsyslog
     {{ end }}
