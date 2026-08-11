@@ -12,6 +12,15 @@
 - Fixed 2.1.22 file resource path `/etc/postfix/main.conf` -> `/etc/postfix/main.cf`, the file the remediation actually writes
 - Removed orphan `section_6/cis_6.1.1.1.x/cis_6.1.1.4.yml` - filename ID does not exist in v1.0.0, it reused the 6.1.1.1.4 toggle for an unrelated syslog-service check with no remediation counterpart
 - Corrected the 2.1.22 title - wrong leading ID (2.1.21), missing separator, and singular "agent" where the benchmark says "agents are"
+- Rewrote both 1.2.1.3 checks - they used bash process substitution `< <(find ...)` and `$'\0'`, which dash rejects outright, so the tests failed on syntax before any logic ran; the first also had a malformed line continuation that folded `done` into the `stat` arguments. Now a single POSIX `find` with `-exec`
+- Rewrote 1.2.1.1 with `find` - it relied on brace expansion `*.{list,sources}`, which dash does not perform, so any offending file in `/etc/apt/sources.list.d/` would have been missed
+- Corrected 1.3.1.4 expected value 0 -> 1. The benchmark contradicts itself: title, description and remediation all say the setting must be enabled (1), while its audit text says verify 0. The test had copied the audit text, so it disagreed with remediation; 0 would disable the protection
+- Fixed the 1.5.12 / 1.5.13 stdout patterns - `'/^*.conf:...'` is degenerate (`^` followed by `*`) and could never match. 1.5.13 also searched only `/etc/systemd/coredump.conf.d/` while remediation writes `Storage=none` to `/etc/systemd/coredump.conf` itself. Both now grep the main file and the drop-in directory
+- Rewrote 5.1.4 - `exec` produced `AllowUsers <value>` while `stdout` expected `allowusers: <value>`, a format grep never emits, and all four allow/deny directives were required even though every one of the backing variables defaults to empty. Each directive is now asserted only when its variable is set
+- Closed three unterminated regexes in 6.1.1.2.2 - `'/ServerKeyFile=.*.pem'` has no closing slash, so goss searched for that text literally. The file was correctly configured all along
+- Rewrote 6.2.3.8 / 6.2.3.9 to assert a rule for every network config path that exists, matching the remediation, which gates each auditd rule on path existence. The tests previously demanded rules for `/etc/netplan` and `/etc/NetworkManager` unconditionally and so failed on hosts where those paths are absent
+- Fixed a false pass in the 6.2.3.9 conf check - a plain `grep system-locale` matched the commented-out NetworkManager line, reporting compliance based on a comment. Both checks now match only lines beginning `-a`
+- Fixed the 7.2.9 permissions check - `exec` ran bare `stat` (multi-line output) while `stdout` expected `stat -c '%a'` format, so it could never match. Now lists non-compliant home directories and asserts none
 
 ## March 2026 — audit alignment
 
