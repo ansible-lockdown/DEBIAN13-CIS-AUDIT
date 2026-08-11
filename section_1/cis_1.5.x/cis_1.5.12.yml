@@ -5,13 +5,10 @@
 command:
   system_processsizemax_conf:
     title: 1.5.12 | Ensure systemd-coredump ProcessSizeMax is configured
-    exec: grep -Ri '^ProcessSizeMax' //etc/systemd/coredump.conf.d/*
-    exit-status:
-      or:
-      - 0
-      - 2
+    exec: grep -Rhs '^ProcessSizeMax' /etc/systemd/coredump.conf /etc/systemd/coredump.conf.d/
+    exit-status: 0
     stdout:
-    - '/^*.conf:ProcessSizeMax\s*=\s*0/'
+    - '/^ProcessSizeMax\s*=\s*0\s*$/'
     meta:
       server: 1
       workstation: 1
