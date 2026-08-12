@@ -2,6 +2,15 @@
 
 ## Based on CIS v1.0.0 - Branch align_1.0.0
 
+- 5.4.2.8 used bash process substitution. Goss runs commands under sh, which is dash on Debian,
+  so the check failed to parse, produced no output and always reported compliant. Rewritten
+  POSIX-safe and verified against a real host
+- 5.4.1.6 used a bash [[ ]] test, so the comparison never fired, and asserted on "Failure" while
+  the script echoes "failure". Both corrected, plus a guard for accounts with no last-change date
+- 2.3.2.1 joined the configured NTP names with no separator, so the pattern only matched when
+  exactly one pool or server was set
+- Added .yamllint so the repo has a working YAML gate, and cleared the issues it surfaced in
+  vars/CIS.yml (sequence indentation, comment spacing, missing trailing newline)
 - Updated `run_audit.sh` to the current version shared by the other audit repos. OS discovery now
   derives the content path from `BENCHMARK_OS` instead of parsing `/etc/os-release`, and the goss
   version check reads only the first line of `goss -v` so multi-line version output no longer fails
