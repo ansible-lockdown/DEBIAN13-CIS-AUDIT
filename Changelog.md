@@ -2,6 +2,10 @@
 
 ## Based on CIS v1.0.0 - Branch align_1.0.0
 
+- Updated `run_audit.sh` to the current version shared by the other audit repos. OS discovery now
+  derives the content path from `BENCHMARK_OS` instead of parsing `/etc/os-release`, and the goss
+  version check reads only the first line of `goss -v` so multi-line version output no longer fails
+  the pre-check. Minimum goss version raised to 0.4.8 in the script and the README
 - Corrected 12 files gated on the wrong `deb13cis_rule_*` toggle, which silently disabled the neighbouring control's check: 1.1.2.6.4, 1.1.2.7.4, 2.1.7, 2.1.15, 2.1.21, 2.1.22, 2.1.23, 2.4.1.9, 3.2.3, 3.2.5, 3.2.6, 5.3.3.3.3
 - Corrected the 1.7.10 / 1.7.11 GDM config path `/etc/gdm/custom.conf` -> `/etc/gdm3/custom.conf`, the path remediation actually writes on Debian
 - Corrected the 6.3.3 AIDE config path `/etc/aide.conf` -> `/etc/aide/aide.conf` and the five audit tool paths `/sbin/*` -> `/usr/sbin/*`, matching remediation
@@ -15,7 +19,7 @@
 - Rewrote both 1.2.1.3 checks - they used bash process substitution `< <(find ...)` and `$'\0'`, which dash rejects outright, so the tests failed on syntax before any logic ran; the first also had a malformed line continuation that folded `done` into the `stat` arguments. Now a single POSIX `find` with `-exec`
 - Rewrote 1.2.1.1 with `find` - it relied on brace expansion `*.{list,sources}`, which dash does not perform, so any offending file in `/etc/apt/sources.list.d/` would have been missed
 - Corrected 1.3.1.4 expected value 0 -> 1. The benchmark contradicts itself: title, description and remediation all say the setting must be enabled (1), while its audit text says verify 0. The test had copied the audit text, so it disagreed with remediation; 0 would disable the protection
-- Fixed the 1.5.12 / 1.5.13 stdout patterns - `'/^*.conf:...'` is degenerate (`^` followed by `*`) and could never match. 1.5.13 also searched only `/etc/systemd/coredump.conf.d/` while remediation writes `Storage=none` to `/etc/systemd/coredump.conf` itself. Both now grep the main file and the drop-in directory
+- Converted 1.5.12 / 1.5.13 from `command` + grep to `file:` resources on the exact paths remediation writes (`/etc/systemd/coredump.conf.d/60-coredump.conf` and `/etc/systemd/coredump.conf`). The old stdout patterns `'/^*.conf:...'` were degenerate (`^` followed by `*`) and could never match, and 1.5.13 searched only the drop-in directory while remediation writes `Storage=none` to `coredump.conf` itself
 - Rewrote 5.1.4 - `exec` produced `AllowUsers <value>` while `stdout` expected `allowusers: <value>`, a format grep never emits, and all four allow/deny directives were required even though every one of the backing variables defaults to empty. Each directive is now asserted only when its variable is set
 - Closed three unterminated regexes in 6.1.1.2.2 - `'/ServerKeyFile=.*.pem'` has no closing slash, so goss searched for that text literally. The file was correctly configured all along
 - Rewrote 6.2.3.8 / 6.2.3.9 to assert a rule for every network config path that exists, matching the remediation, which gates each auditd rule on path existence. The tests previously demanded rules for `/etc/netplan` and `/etc/NetworkManager` unconditionally and so failed on hosts where those paths are absent
