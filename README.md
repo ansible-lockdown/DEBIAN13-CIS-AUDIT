@@ -2,7 +2,7 @@
 
 ## Overview
 
-### Based on CIS Benchmark for Debian 13 LTS Benchmark v1.0.0
+### Based on CIS Benchmark for Debian 13 LTS Benchmark v1.1.0
 
 [Centre For Internet Security]
 
@@ -28,14 +28,14 @@ The listed variable for every control/benchmark can be turned on/off or section
 
 ## Requirements
 
-goss >= 0.4.7
+goss >= 0.6.0
 root privileges
 
 ## Branches
 
 If running as part of the ansible playbook, this will pull in the relevant branch for the version of benchmark you are remediating.
 
-- e.g. 1.0.0 will pull in branch benchmark_1.0.0
+- e.g. 1.1.0 will pull in branch benchmark_1.1.0
 
 Devel is normally the latest benchmark version, so maybe different from the version of benchmark you wish to test.
 Details will show in the README as part of the remedation as to the benchmark for the version it is written for.
@@ -58,6 +58,12 @@ Ability to add your own requirements is available in several sections
 
 [MindPoint Group]
 
+## Contributing
+
+Bug reports and feature requests are welcome from everyone, please raise an issue.
+
+Pull requests are accepted from approved contributors only. To be onboarded, join the [Discord Server](https://www.lockdownenterprise.com/discord) and request contributor access. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full process.
+
 ## Links and Further information
 
 - [Goss]
@@ -71,7 +77,7 @@ README Links
 [Centre For Internet Security]: https://www.cisecurity.org
 [Read the Docs - Audit]: https://ansible-lockdown.readthedocs.io/en/latest/audit/getting-started-audit.html
 
-[goss documentation]: (https://github.com/goss-org/goss/blob/master/README.md)
+[goss documentation]: (https://github.com/krameff/goss/blob/master/README.md)
 
 [Goss]: https://goss.rocks
 

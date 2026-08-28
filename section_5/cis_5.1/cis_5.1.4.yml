@@ -3,19 +3,37 @@
 {{ if .Vars.deb13cis_level_1 }}
   {{ if .Vars.deb13cis_rule_5_1_4 }}
 command:
-  sshd_access_limited:
-    title: 5.1.4 | Ensure sshd access is configured | config
-    exec: grep -Ei "^(Allow|Deny)(Users|Groups)" /etc/ssh/sshd_config /etc/ssh/sshd_config.d/*.conf
-    exit-status:
-      or:
-      - 0
-      - 1
-      - 2
-    stdout:
-    - 'allowusers: {{ .Vars.deb13cis_sshd_allow_users }}'
-    - 'allowgroups: {{ .Vars.deb13cis_sshd_allow_groups }}'
-    - 'denyusers: {{ .Vars.deb13cis_sshd_deny_users }}'
-    - 'denygroups: {{ .Vars.deb13cis_sshd_deny_groups }}'
+  /etc/ssh/ssh_host_pub_key_user:
+    title: 5.1.4 | Ensure access to SSH public host key files is configured | user
+    exec: "userkeys=$(sudo find /etc/ssh/ -name *_key.pub -type f ! -user root ); echo $userkeys"
+    exit-status: 0
+    stdout: ['!/./']
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.4
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+  /etc/ssh/ssh_host_pub_key_group:
+    title: 5.1.4 | Ensure access to SSH public host key files is configured | group
+    exec: "groupkeys=$(sudo find /etc/ssh/ -name *_key.pub -type f ! -group root ); echo $groupkeys"
+    exit-status: 0
+    stdout: ['!/./']
+    meta:
+      server: 1
+      workstation: 1
+      CIS_ID:
+      - 5.1.4
+      NIST800-53R5:
+      - AC-3
+      - MP-2
+  /etc/ssh/ssh_host_pub_key_perms:
+    title: 5.1.4 | Ensure access to SSH public host key files is configured | perms
+    exec: "keysperm=$(sudo find /etc/ssh/ -name *_key.pub -type f -perm /133 ); echo $keyperms"
+    exit-status: 0
+    stdout: ['!/./']
     meta:
       server: 1
       workstation: 1

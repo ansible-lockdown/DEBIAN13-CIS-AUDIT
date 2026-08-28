@@ -3,7 +3,7 @@
 ## metadata for benchmark
 
 ## metadata for Audit benchmark
-benchmark_version: '1.0.0'
+benchmark_version: '1.1.0'
 
 # If run via script this is discovered and set
 host_os_distribution: Debian
@@ -27,9 +27,9 @@ deb13cis_level_2: true
 run_heavy_tests: true
 
 #  True is BIOS based system else set to false
-deb13cis_legacy_boot: true
+deb13cis_legacy_boot: false
 
-deb13cis_set_boot_pass: true
+deb13cis_set_boot_pass: false
 
 # Section 1 is Initial setup (FileSystem Configuration, Configure Software Updates, Filesystem Integrity Checking, Secure Boot Settings,
 # Additional Process Hardening, Mandatory Access Control, Command Line Warning Banners, and GNOME Display Manager)
@@ -92,6 +92,12 @@ deb13cis_rule_1_2_1_6: true
 deb13cis_rule_1_2_1_7: true
 deb13cis_rule_1_2_1_8: true
 deb13cis_rule_1_2_1_9: true
+deb13cis_rule_1_2_1_10: true
+deb13cis_rule_1_2_1_11: true
+deb13cis_rule_1_2_1_12: true
+deb13cis_rule_1_2_1_13: true
+deb13cis_rule_1_2_1_14: true
+deb13cis_rule_1_2_1_15: true
 # Package updates
 deb13cis_rule_1_2_2_1: true
 
@@ -118,7 +124,6 @@ deb13cis_rule_1_5_9: true
 deb13cis_rule_1_5_10: true
 deb13cis_rule_1_5_11: true
 deb13cis_rule_1_5_12: true
-deb13cis_rule_1_5_13: true
 
 # Command line warning banners
 deb13cis_rule_1_6_1: true
@@ -127,6 +132,12 @@ deb13cis_rule_1_6_3: true
 deb13cis_rule_1_6_4: true
 deb13cis_rule_1_6_5: true
 deb13cis_rule_1_6_6: true
+deb13cis_rule_1_6_7: true
+deb13cis_rule_1_6_8: true
+deb13cis_rule_1_6_9: true
+deb13cis_rule_1_6_10: true
+deb13cis_rule_1_6_11: true
+deb13cis_rule_1_6_12: true
 
 # Gnome Display Manager
 deb13cis_rule_1_7_1: true
@@ -136,10 +147,6 @@ deb13cis_rule_1_7_4: true
 deb13cis_rule_1_7_5: true
 deb13cis_rule_1_7_6: true
 deb13cis_rule_1_7_7: true
-deb13cis_rule_1_7_8: true
-deb13cis_rule_1_7_9: true
-deb13cis_rule_1_7_10: true
-deb13cis_rule_1_7_11: true
 
 # Section 2 rules are controlling Services (Special Purpose Services, and service clients)
 ## Configure Server Services
@@ -211,6 +218,7 @@ deb13cis_rule_3_2_3: true
 deb13cis_rule_3_2_4: true
 deb13cis_rule_3_2_5: true
 deb13cis_rule_3_2_6: true
+deb13cis_rule_3_2_7: true
 # Network Kernel Parameters ipv4
 deb13cis_rule_3_3_1_1: true
 deb13cis_rule_3_3_1_2: true
@@ -230,6 +238,7 @@ deb13cis_rule_3_3_1_15: true
 deb13cis_rule_3_3_1_16: true
 deb13cis_rule_3_3_1_17: true
 deb13cis_rule_3_3_1_18: true
+deb13cis_rule_3_3_1_19: true
 # Network Kernel Parameters ipv6
 deb13cis_rule_3_3_2_1: true
 deb13cis_rule_3_3_2_2: true
@@ -274,6 +283,7 @@ deb13cis_rule_5_1_20: true
 deb13cis_rule_5_1_21: true
 deb13cis_rule_5_1_22: true
 deb13cis_rule_5_1_23: true
+deb13cis_rule_5_1_24: true
 # 5.2 Configure privilege escalation
 deb13cis_rule_5_2_1: true
 deb13cis_rule_5_2_2: true
@@ -286,6 +296,7 @@ deb13cis_rule_5_2_7: true
 deb13cis_rule_5_3_1_1: true
 deb13cis_rule_5_3_1_2: true
 deb13cis_rule_5_3_1_3: true
+deb13cis_rule_5_3_1_4: true
 # 5.3.2 Configure pam-auth-update profiles
 deb13cis_rule_5_3_2_1: true
 deb13cis_rule_5_3_2_2: true
@@ -341,19 +352,16 @@ deb13cis_rule_5_4_3_3: true
 ## Section 6
 # 6.1.1.1 Configure systemd-journald service
 deb13cis_rule_6_1_1_1_1: true
-deb13cis_rule_6_1_1_1_2: true
-deb13cis_rule_6_1_1_1_3: true
 deb13cis_rule_6_1_1_1_4: true
 deb13cis_rule_6_1_1_1_5: true
 deb13cis_rule_6_1_1_1_6: true
+deb13cis_rule_6_1_1_1_7: true
 # 6.1.1.2 Configure systemd-journald service
-deb13cis_rule_6_1_1_2_1: true
-deb13cis_rule_6_1_1_2_2: true
-deb13cis_rule_6_1_1_2_3: true
-deb13cis_rule_6_1_1_2_4: true
+deb13cis_rule_6_1_1_1_2: true
 # 6.1.2.x Configure Rsyslog
 deb13cis_rule_6_1_2_1: true
 deb13cis_rule_6_1_2_2: true
+deb13cis_rule_6_1_1_1_3: true
 deb13cis_rule_6_1_2_3: true
 deb13cis_rule_6_1_2_4: true
 deb13cis_rule_6_1_2_5: true
@@ -362,7 +370,6 @@ deb13cis_rule_6_1_2_7: true
 deb13cis_rule_6_1_2_8: true
 deb13cis_rule_6_1_2_9: true
 deb13cis_rule_6_1_2_10: true
-deb13cis_rule_6_1_2_11: true
 
 ## 6.2.2 Configure Logfiles
 deb13cis_rule_6_1_3_1: true
@@ -416,7 +423,6 @@ deb13cis_rule_6_2_3_33: true
 deb13cis_rule_6_2_3_34: true
 deb13cis_rule_6_2_3_35: true
 deb13cis_rule_6_2_3_36: true
-deb13cis_rule_6_2_3_37: true
 ## 6.2.4 Configure auditd File Access
 deb13cis_rule_6_2_4_1: true
 deb13cis_rule_6_2_4_2: true
@@ -460,6 +466,7 @@ deb13cis_rule_7_2_7: true
 deb13cis_rule_7_2_8: true
 deb13cis_rule_7_2_9: true
 deb13cis_rule_7_2_10: true
+deb13cis_rule_7_2_11: true
 
 ############
 
@@ -476,10 +483,14 @@ deb13cis_apparmor_disable: false
 
 # Warning Banner Content (issue, issue.net, motd)
 deb13cis_warning_banner: Authorized users only. All activity may be monitored and reported.
+deb13cis_sshd_banner_file: /etc/issue.net
+deb13cis_disable_dynamic_motd: true
 # End Banner
 
 # 1.8 Gnome Desktop
 deb13cis_dconf_db_name: local
+deb13cis_screensaver_idle_delay: 900
+deb13cis_screensaver_lock_delay: 5
 
 # Section 2
 # Service configuration
@@ -561,19 +572,18 @@ deb13cis_time_pool:
   - name: time.nist.gov
     pool_options: iburst maxsources 4
 
-
 # The following variable represents a list of of time servers used
 # for configuring chrony and timesyncd
 # Each list item contains two settings, `name` (the domain name of the server) and synchronization `options`.
 # The default setting for the `options` is `iburst` -- please refer to the documentation
 # of the time synchronization mechanism you are using.
 deb13cis_time_servers:
-- name: time-a-g.nist.gov
-  options: iburst
-- name: time-b-g.nist.gov
-  options: iburst
-- name: time-c-g.nist.gov
-  options: iburst
+  - name: time-a-g.nist.gov
+    options: iburst
+  - name: time-b-g.nist.gov
+    options: iburst
+  - name: time-c-g.nist.gov
+    options: iburst
 
 # Section 3
 
@@ -602,66 +612,11 @@ deb13cis_is_router: false
 # Any other value, e.g. `none` will skip all firewall-related controls.
 deb13cis_firewall_package: "ufw"
 
-
 # Section 5
-
-deb13cis_ssh_strong_ciphers:
-  - aes256-gcm@openssh.com
-  - aes128-gcm@openssh.com
-  - aes256-ctr
-  - aes192-ctr
-  - aes128-ctr
-deb13cis_ssh_weak_ciphers:
-  - 3des-cbc
-  - aes128-cbc
-  - aes192-cbc
-  - aes256-cbc
-  - arcfour
-  - chacha20-poly1305@openssh.com
-  - arcfour128
-  - arcfour256
-  - blowfish-cbc
-  - cast128-cbc
-  - rijndael-cbc@lysator.liu.se
-
-deb13cis_ssh_strong_macs:
-  - hmac-sha1
-  - hmac-sha2-256
-  #  - hmac-sha2-384  # hashed out seen as bad ssh2 MAC
-  - hmac-sha2-512
-deb13cis_ssh_weak_macs:
-  - hmac-md5
-  - hmac-md5-96
-  - hmac-ripemd160
-  - hmac-sha1-96
-  - umac-64@openssh.com
-  - umac-128@openssh.com
-  - hmac-md5-etm@openssh.com
-  - hmac-md5-96-etm@openssh.com
-  - hmac-ripemd160-etm@openssh.com
-  - hmac-sha1-etm@openssh.com
-  - hmac-sha1-96-etm@openssh.com
-  - umac-64-etm@openssh.com
-  - umac-128-etm@openssh.com
-  - hmac-sha2-512-etm@openssh.com
-  - hmac-sha2-256-etm@openssh.com
-
-deb13cis_ssh_strong_kex:
-  - ecdh-sha2-nistp256
-  - ecdh-sha2-nistp384
-  - ecdh-sha2-nistp521
-  - diffie-hellman-group-exchange-sha256
-  - diffie-hellman-group14-sha256
-  - diffie-hellman-group16-sha512
-  - diffie-hellman-group18-sha512
-deb13cis_ssh_weak_kex:
-  - diffie-hellman-group1-sha1
-  - diffie-hellman-group14-sha1
-  - diffie-hellman-group-exchange-sha1
 
 deb13cis_sshd_config_file: /etc/ssh/sshd_config
 
-## 5.1.4 Note the following to understand precedence and layout , comma separated
+## 5.1.5 Note the following to understand precedence and layout , comma separated
 deb13cis_sshd_allow_users: ""
 deb13cis_sshd_allow_groups: ""
 deb13cis_sshd_deny_users: ""
@@ -672,7 +627,6 @@ deb13cis_sshd_client_alive_count_max: 3
 
 ## 5.2.7 set sugroup if differs from wheel
 deb13cis_sugroup: nosugroup
-
 
 ## 5.3.3.2.3 Set option used for password complexity
 # either mincall or credits - enabling to check for one option in settings
@@ -708,9 +662,9 @@ deb13cis_remote_log_retrycount: 100
 deb13cis_remote_log_queuesize: 1000
 
 deb13cis_rsyslog_stream_cafile: /change/me/to/correct/path
-# 6.3
+#  6.3
 ## If using auditd settings
 deb13cis_auditd: true
 
-# Control 7.1.12
+#  Control 7.1.12
 deb13cis_exclude_unowned_search_path: \(! -path "/run/user/*" -a ! -path "/proc/*" -a ! -path "*/containerd/*" -a ! -path "*/kubelet/pods/*" -a ! -path "*/kubelet/plugins/*" -a ! -path "/sys/fs/cgroup/memory/*" -a ! -path "/var/*/private/*" \)
