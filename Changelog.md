@@ -1,5 +1,21 @@
 # Debian 13 CIS
 
+## Based on CIS v1.0.0 - Branch sept26_updates
+
+- 1.7.2 defined the goss key gdm_profile_banner twice in one command: map, so the
+  banner-message-enable assertion was lost and goss aborts on a duplicate key
+- 1.7.10 and 1.7.11 both keyed on /etc/gdm3/custom.conf; level_1 and level_2 both default
+  true, so goss merged them and 1.7.10 was silently dropped. Both now use named keys
+- 1.6.1, 1.6.2 and 1.6.3 asserted '!/(?i)linux' with no closing /, which goss reads as a
+  literal string, so the OS-disclosure check never fired. Host-proven: all three banner
+  files contained "Debian GNU/Linux" while the audit reported clean
+- 1.1.1.6 checked the non-existent overlayfs module; the FATAL "module not found" message
+  itself contained the string being grepped, so it always passed. Now overlay
+
+- 6.2.3.10 was a placeholder that echoed "Manual" then asserted the output must not contain
+  "Manual", so it could only ever fail and checked nothing. Replaced with conf and running
+  checks on the -k privileged rules, in the POSIX echo-on-failure style used by 6.2.3.9
+
 ## Based on CIS v1.0.0 - Branch align_1.0.0
 
 - 5.4.2.8 used bash process substitution. Goss runs commands under sh, which is dash on Debian,
